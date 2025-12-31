@@ -1,0 +1,829 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    overflow-y: hidden;
+    height: 100vh;
+}
+
+/* Animaciones principales */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+@keyframes explode {
+    0% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--x), var(--y));
+        opacity: 0;
+    }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes cardFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes shine {
+    0% { left: -50%; }
+    100% { left: 150%; }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes textGlow {
+    0%, 100% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(102, 126, 234, 0.6); }
+    50% { text-shadow: 0 0 30px rgba(255, 255, 255, 1), 0 0 60px rgba(240, 147, 251, 0.8); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes rainbowShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes rotate {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg); }
+    75% { transform: rotate(10deg); }
+}
+
+@keyframes confetti-fall {
+    to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.2); }
+    50% { transform: scale(1); }
+}
+
+@keyframes music-float {
+    0% { opacity: 1; transform: translateY(0) rotate(0deg); }
+    100% { opacity: 0; transform: translateY(-200px) rotate(360deg); }
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 5px 20px rgba(255, 255, 255, 0.3);
+    }
+    50% {
+        box-shadow: 0 5px 40px rgba(255, 255, 255, 0.6);
+    }
+}
+
+@keyframes buttonGradient {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes surpriseGlow {
+    0%, 100% { box-shadow: 0 10px 40px rgba(245, 87, 108, 0.6), 0 0 30px rgba(255, 215, 0, 0.4); }
+    50% { box-shadow: 0 10px 50px rgba(245, 87, 108, 0.9), 0 0 50px rgba(255, 215, 0, 0.7); }
+}
+
+@keyframes explode-initial {
+    0% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--x), var(--y));
+        opacity: 0;
+    }
+}
+
+/* Estrellas de fondo */
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 3s infinite;
+}
+
+/* Fuegos artificiales */
+.firework {
+    position: fixed;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    animation: explode 1.5s ease-out forwards;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.firework-initial {
+    position: fixed;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    animation: explode-initial 2s ease-out forwards;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* Contenedor principal */
+.container {
+    position: relative;
+    z-index: 3;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 10px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Tarjeta principal */
+.card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    padding: 30px 20px;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4), 0 0 40px rgba(255, 255, 255, 0.1);
+    animation: fadeInScale 1s ease-out, cardFloat 6s ease-in-out infinite;
+    text-align: center;
+    position: relative;
+    overflow: visible;
+    width: 100%;
+    max-width: 600px;
+    z-index: 1;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+    transform: rotate(45deg);
+    animation: shine 3s infinite;
+}
+
+/* Tipografía */
+h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: 2em;
+    color: #ffffff;
+    margin-bottom: 15px;
+    animation: bounce 2s infinite, textGlow 3s ease-in-out infinite;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(102, 126, 234, 0.6), 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.year {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.5em;
+    font-weight: 900;
+    background: linear-gradient(45deg, #ff0080, #ff8c00, #40e0d0, #ff0080);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 15px 0;
+    animation: pulse 2s infinite, rainbowShift 4s ease infinite;
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
+}
+
+.message {
+    font-size: 1em;
+    line-height: 1.8;
+    color: #ffffff;
+    margin: 20px 0;
+    animation: fadeIn 2s ease-out;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    font-weight: 400;
+}
+
+.signature {
+    font-family: 'Pacifico', cursive;
+    font-style: normal;
+    color: #ffffff;
+    margin-top: 20px;
+    font-size: 1em;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    opacity: 0.95;
+}
+
+.emoji {
+    display: inline-block;
+    animation: rotate 2s infinite;
+    font-size: 1.5em;
+}
+
+.countdown {
+    font-size: 1em;
+    color: #ffffff;
+    margin: 15px 0;
+    font-weight: 700;
+    word-break: break-word;
+    text-shadow: 0 0 15px rgba(245, 87, 108, 0.8), 0 2px 10px rgba(0, 0, 0, 0.5);
+    background: rgba(245, 87, 108, 0.2);
+    padding: 10px 20px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+/* Botones */
+button {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    background-size: 200% 200%;
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 15px 25px;
+    font-size: 0.85em;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    margin: 8px 5px;
+    transition: all 0.4s ease;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    animation: buttonGradient 3s ease infinite;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+    z-index: -1;
+}
+
+button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+button:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(102, 126, 234, 0.6);
+}
+
+button:active {
+    transform: translateY(-2px) scale(0.98);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+button.secondary {
+    background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
+    box-shadow: 0 8px 20px rgba(240, 147, 251, 0.4);
+}
+
+button.secondary:hover {
+    box-shadow: 0 12px 30px rgba(240, 147, 251, 0.6);
+}
+
+button.secondary:active {
+    box-shadow: 0 5px 15px rgba(240, 147, 251, 0.4);
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Confetti */
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: #f5576c;
+    position: absolute;
+    animation: confetti-fall 3s linear forwards;
+    z-index: 9999;
+}
+
+/* Caja de sorpresas flotante */
+.surprise-box {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #f5576c, #ff8800, #ffd700);
+    background-size: 200% 200%;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    animation: float 3s ease-in-out infinite, surpriseGlow 2s ease-in-out infinite, buttonGradient 3s ease infinite;
+    box-shadow: 0 10px 40px rgba(245, 87, 108, 0.6), 0 0 30px rgba(255, 215, 0, 0.4);
+    z-index: 1000;
+    transition: transform 0.3s;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+}
+
+.surprise-box:hover {
+    transform: scale(1.1) rotate(15deg);
+}
+
+.surprise-box:active {
+    transform: scale(0.95);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.5s;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.95), rgba(118, 75, 162, 0.95));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    padding: 30px 20px;
+    border-radius: 30px;
+    max-width: 90%;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 50px rgba(255, 255, 255, 0.2);
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 2em;
+    cursor: pointer;
+    color: #ffffff;
+    transition: transform 0.3s;
+}
+
+.close-modal:hover {
+    transform: scale(1.2) rotate(90deg);
+}
+
+.memory-card {
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px 0;
+    animation: slideIn 0.5s;
+}
+
+.heart {
+    display: inline-block;
+    color: #ff0000;
+    animation: heartbeat 1.5s infinite;
+}
+
+/* Notas musicales */
+.music-note {
+    position: fixed;
+    font-size: 2em;
+    animation: music-float 3s ease-in-out forwards;
+    z-index: 9999;
+    opacity: 0;
+}
+
+/* Chispas */
+.sparkle {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+    z-index: 9998;
+}
+
+.sparkle::before,
+.sparkle::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: gold;
+    left: 0;
+    top: 50%;
+}
+
+.sparkle::after {
+    transform: rotate(90deg);
+}
+
+/* Galería de fotos */
+.photo-gallery {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+.photo-placeholder {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.photo-placeholder:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Pantalla de cuenta regresiva */
+.countdown-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.countdown-screen.hidden {
+    display: none;
+}
+
+.countdown-title {
+    font-size: 2em;
+    color: white;
+    text-align: center;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    animation: pulse 2s infinite;
+}
+
+.countdown-display {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 500px;
+}
+
+.countdown-time {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    text-align: center;
+}
+
+.time-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.time-number {
+    font-size: 2em;
+    font-weight: bold;
+    color: white;
+    font-family: 'Courier New', monospace;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 10px;
+    min-width: 50px;
+    margin-bottom: 5px;
+}
+
+.time-label {
+    font-size: 0.7em;
+    color: rgba(255, 255, 255, 0.9);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+.skip-button {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    color: white;
+    border: 3px solid white;
+    padding: 18px 45px;
+    font-size: 1em;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    animation: glow 2s infinite;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.skip-button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+    z-index: -1;
+}
+
+.skip-button:hover::after {
+    width: 400px;
+    height: 400px;
+}
+
+.skip-button:hover {
+    background: white;
+    color: #667eea;
+    transform: scale(1.08) translateY(-3px);
+    box-shadow: 0 12px 40px rgba(255, 255, 255, 0.5);
+    border-color: white;
+}
+
+.skip-button:active {
+    transform: scale(1.02) translateY(-1px);
+}
+
+.hint-text {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9em;
+    margin-top: 20px;
+    text-align: center;
+    animation: fadeIn 3s;
+}
+
+.main-content {
+    display: none;
+}
+
+.main-content.visible {
+    display: block;
+}
+
+/* Nuevos botones de control */
+.control-buttons {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.control-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    font-size: 1.3em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 0;
+    margin: 0;
+}
+
+.control-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+/* Media Queries - Tablet y Desktop */
+@media (min-width: 768px) {
+    h1 {
+        font-size: 3em;
+        margin-bottom: 20px;
+    }
+
+    .year {
+        font-size: 4em;
+        margin: 20px 0;
+    }
+
+    .message {
+        font-size: 1.2em;
+        line-height: 1.8;
+        margin: 30px 0;
+    }
+
+    .signature {
+        margin-top: 30px;
+        font-size: 1.1em;
+    }
+
+    .emoji {
+        font-size: 2em;
+    }
+
+    .countdown {
+        font-size: 1.5em;
+        margin: 20px 0;
+    }
+
+    .card {
+        padding: 50px;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    button {
+        padding: 18px 45px;
+        font-size: 1em;
+        margin: 10px;
+    }
+
+    .button-container {
+        flex-direction: row;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .surprise-box {
+        bottom: 20px;
+        right: 20px;
+        width: 80px;
+        height: 80px;
+        font-size: 2.5em;
+    }
+
+    .modal-content {
+        padding: 50px 40px;
+        max-width: 600px;
+        border-radius: 40px;
+    }
+
+    .countdown-title {
+        font-size: 3.5em;
+    }
+
+    .countdown-display {
+        padding: 30px 40px;
+        margin-bottom: 40px;
+    }
+
+    .countdown-time {
+        gap: 20px;
+    }
+
+    .time-number {
+        font-size: 3.5em;
+        padding: 15px;
+        min-width: 90px;
+    }
+
+    .time-label {
+        font-size: 0.9em;
+    }
+
+    .skip-button {
+        padding: 22px 60px;
+        font-size: 1.2em;
+    }
+
+    .hint-text {
+        font-size: 1.1em;
+    }
+
+    .control-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5em;
+    }
+
+    .control-buttons {
+        top: 20px;
+        right: 20px;
+        gap: 12px;
+    }
+}
