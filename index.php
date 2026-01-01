@@ -97,33 +97,32 @@
                 <div class="countdown" id="countdown" role="timer" aria-live="polite"></div>
 
                 <div class="message">
+                    <!-- El mensaje será insertado dinámicamente por JavaScript -->
+                    <p id="randomMessage"></p>
+
+                    <div class="message-progress-container">
+                        <div class="message-progress-bar" id="msgProgressBar"></div>
+                    </div>
+                    <div class="reading-hint">✨ Espera, hay más mensajes para ti... ✨</div>
+
+                    <p style='margin-top: 20px;'><strong>Mis deseos para ti:</strong></p>
+
                     <?php
-                    $messages = [
-                        "Amiga, eres una de las personas más importantes en mi vida. Que este 2026 nos traiga más risas, aventuras y momentos inolvidables. ¡Te deseo lo mejor!",
-                        "Gracias por ser mi confidente y por estar siempre ahí. Que este año te llene de toda la felicidad que mereces. ¡Estoy orgulloso de ti!",
-                        "Que el 2026 sea el año en que todos tus sueños se hagan realidad. Siempre estaré aquí para apoyarte en todo. ¡Eres increíble!",
-                        "Por más aventuras, locuras y momentos que solo nosotros entendemos. Brindo por nuestra amistad. ¡Este será un gran año!",
-                        "Eres una persona muy especial para mí. Que este nuevo año te traiga todo lo que deseas y mereces. ¡Gracias por tu amistad!"
-                    ];
-
-                    $randomMessage = $messages[array_rand($messages)];
-                    echo "<p>$randomMessage</p>";
-
+                    // Recargar array de deseos si no está definido en este bloque
                     $wishes = [
-                        "💪 Salud, energía y bienestar",
+                        "🤝 Una amistad a prueba de tiempo",
                         "🌟 Que cumplas todos tus sueños",
-                        "✨ Paz mental y equilibrio",
-                        "🎯 Éxito en todo lo que emprendas",
+                        "✨ Saber que siempre estamos ahí",
+                        "💫 Reencuentros inolvidables",
+                        "💪 Salud, energía y bienestar",
                         "😊 Sonrisas y felicidad genuina",
-                        "🚀 Crecimiento personal y profesional",
-                        "🌈 Días llenos de sorpresas positivas",
-                        "🎉 Aventuras juntos que recordemos siempre",
-                        "💫 Que brilles y alcances tus metas",
-                        "🤝 Una amistad que siga siendo eterna"
+                        "🎯 Éxito en tus proyectos personales",
+                        "🌈 Que la distancia nunca nos separe",
+                        "🚀 Crecimiento en todo lo que hagas",
+                        "💙 Un año lleno de bendiciones"
                     ];
 
-                    echo "<p style='margin-top: 20px;'><strong>Mis deseos para ti:</strong></p>";
-                    echo "<ul style='list-style: none; padding: 0; text-align: left; display: inline-block;'>";
+                    echo "<ul style='list-style: none; padding: 0; text-align: left; display: inline-block;' id='wishesList'>";
                     foreach ($wishes as $wish) {
                         echo "<li style='margin: 8px 0; font-size: 0.95em;'>$wish</li>";
                     }

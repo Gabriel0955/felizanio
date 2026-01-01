@@ -99,6 +99,12 @@
                 <div class="message">
                     <!-- El mensaje será insertado dinámicamente por JavaScript -->
                     <p id="randomMessage"></p>
+
+                    <div class="message-progress-container">
+                        <div class="message-progress-bar" id="msgProgressBar"></div>
+                    </div>
+                    <div class="reading-hint">✨ Espera, hay más mensajes para ti... ✨</div>
+
                     <p style='margin-top: 20px;'><strong>Mis deseos para ti:</strong></p>
                     <ul style='list-style: none; padding: 0; text-align: left; display: inline-block;' id="wishesList">
                     </ul>
@@ -124,51 +130,7 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <script>
-        // Función para mostrar mensaje aleatorio y deseos (reemplaza la lógica PHP)
-        function loadRandomContent() {
-            const messages = [
-                "Amiga, eres una de las personas más importantes en mi vida. Que este 2026 nos traiga más risas, aventuras y momentos inolvidables. ¡Te deseo lo mejor!",
-                "Gracias por ser mi confidente y por estar siempre ahí. Que este año te llene de toda la felicidad que mereces. ¡Estoy orgulloso de ti!",
-                "Que el 2026 sea el año en que todos tus sueños se hagan realidad. Siempre estaré aquí para apoyarte en todo. ¡Eres increíble!",
-                "Por más aventuras, locuras y momentos que solo nosotros entendemos. Brindo por nuestra amistad. ¡Este será un gran año!",
-                "Eres una persona muy especial para mí. Que este nuevo año te traiga todo lo que deseas y mereces. ¡Gracias por tu amistad!"
-            ];
-
-            const wishes = [
-                "💪 Salud, energía y bienestar",
-                "🌟 Que cumplas todos tus sueños",
-                "✨ Paz mental y equilibrio",
-                "🎯 Éxito en todo lo que emprendas",
-                "😊 Sonrisas y felicidad genuina",
-                "🚀 Crecimiento personal y profesional",
-                "🌈 Días llenos de sorpresas positivas",
-                "🎉 Aventuras juntos que recordemos siempre",
-                "💫 Que brilles y alcances tus metas",
-                "🤝 Una amistad que siga siendo eterna"
-            ];
-
-            // Mostrar mensaje aleatorio
-            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-            document.getElementById('randomMessage').textContent = randomMessage;
-
-            // Mostrar todos los deseos
-            const wishesList = document.getElementById('wishesList');
-            wishes.forEach(wish => {
-                const li = document.createElement('li');
-                li.style.margin = '8px 0';
-                li.style.fontSize = '0.95em';
-                li.textContent = wish;
-                wishesList.appendChild(li);
-            });
-
-            // Mostrar año actual
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
-        }
-
-        // Cargar contenido cuando la página esté lista
-        document.addEventListener('DOMContentLoaded', loadRandomContent);
-    </script>
+    <!-- La lógica de mensajes y efectos ahora está centralizada en script.js -->
     <script src="script.js"></script>
 </body>
 

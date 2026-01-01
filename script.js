@@ -22,12 +22,14 @@ let state = {
 };
 
 // Inicialización
+// Inicialización
 document.addEventListener('DOMContentLoaded', () => {
     initStars();
     initCountdown();
     initBackgroundFireworks();
     initEventListeners();
     initControlButtons();
+    setTimeout(initMessageRotationAnimated, 1000); // Iniciar rotación de mensajes con animación
 });
 
 // Crear estrellas de fondo
@@ -635,6 +637,82 @@ function toggleAudio() {
     }
 }
 
+// Rotación de Mensajes
+const friendMessages = [
+    "Aunque no hablemos a diario ni nos veamos siempre, sabes que mi cariño por ti sigue intacto. ¡Que este 2026 sea increíble para ti, amiga!",
+    "La verdadera amistad no se mide por la frecuencia, sino por la lealtad. Aunque estemos lejos o ocupados, siempre estás en mis mejores deseos.",
+    "No importa cuánto tiempo pase sin vernos, nuestra conexión sigue igual de fuerte. Gracias por ser esa amiga eterna. ¡Feliz 2026!",
+    "Pasa el tiempo, cambian las cosas, pero tenerte como mejor amiga es una certeza que no cambia. Brindo por nuestra amistad incondicional.",
+    "Sabes que cuentas conmigo siempre, sin importar los días o meses que pasen sin hablar. ¡Te deseo un año espectacular lleno de éxitos!"
+];
+
+const friendWishes = [
+    "🤝 Una amistad a prueba de tiempo",
+    "🌟 Que cumplas todos tus sueños",
+    "✨ Saber que siempre estamos ahí",
+    "💫 Reencuentros inolvidables",
+    "💪 Salud, energía y bienestar",
+    "😊 Sonrisas y felicidad genuina",
+    "🎯 Éxito en tus proyectos personales",
+    "🌈 Que la distancia nunca nos separe",
+    "🚀 Crecimiento en todo lo que hagas",
+    "💙 Un año lleno de bendiciones"
+];
+
+function initMessageRotation() {
+    const messageEl = document.getElementById('randomMessage');
+    const wishesList = document.getElementById('wishesList');
+
+    // Si no existen los elementos, no hacer nada (protección)
+    if (!messageEl) return;
+
+    // Inicializar lista de deseos si está vacía (para index.php o primera carga)
+    if (wishesList && wishesList.children.length === 0) {
+        friendWishes.forEach(wish => {
+            const li = document.createElement('li');
+            li.style.margin = '8px 0';
+            li.style.fontSize = '0.95em';
+            li.textContent = wish;
+            wishesList.appendChild(li);
+        });
+
+        // También poner el año si falta
+        const yearEl = document.getElementById('currentYear');
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
+    }
+
+    // Iniciar rotación cada 6 segundos
+    let msgIndex = 0;
+
+    // Función para cambiar mensaje con fade
+    const changeMessage = () => {
+        // Fade out
+        messageEl.style.transition = 'opacity 0.5s ease-in-out';
+        messageEl.style.opacity = '0';
+
+        setTimeout(() => {
+            // Cambiar texto
+            msgIndex = (msgIndex + 1) % friendMessages.length;
+            messageEl.textContent = friendMessages[msgIndex];
+
+            // Fade in
+            messageEl.style.opacity = '1';
+        }, 500);
+    };
+
+    // Establecer primer mensaje si está vacío (HTML estático)
+    if (!messageEl.textContent.trim()) {
+        messageEl.textContent = friendMessages[0];
+    } else {
+        // Si ya tiene texto (PHP), buscar cuál es para seguir la secuencia
+        const currentText = messageEl.textContent.trim();
+        const foundIndex = friendMessages.indexOf(currentText);
+        if (foundIndex !== -1) msgIndex = foundIndex;
+    }
+
+    setInterval(changeMessage, 6000); // Cambiar cada 6 segundos
+}
+
 // Array de sorpresas
 const surprises = [
     {
@@ -828,3 +906,66 @@ const surprises = [
         }
     }
 ];
+
+// Nueva funci�n de rotaci�n con barra de progreso
+function initMessageRotationAnimated() {
+    const messageEl = document.getElementById('randomMessage');
+    const wishesList = document.getElementById('wishesList');
+
+    if (!messageEl) return;
+
+    // Inicializar lista de deseos si est� vac�a
+    if (wishesList && wishesList.children.length === 0) {
+        friendWishes.forEach(wish => {
+            const li = document.createElement('li');
+            li.style.margin = '8px 0';
+            li.style.fontSize = '0.95em';
+            li.textContent = wish;
+            wishesList.appendChild(li);
+        });
+        const yearEl = document.getElementById('currentYear');
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
+    }
+
+    let msgIndex = 0;
+    const intervalTime = 6000;
+    let startTime = Date.now();
+    let progressBar = document.getElementById('msgProgressBar');
+
+    const changeMessage = () => {
+        messageEl.style.transition = 'opacity 0.5s ease-in-out';
+        messageEl.style.opacity = '0';
+        setTimeout(() => {
+            msgIndex = (msgIndex + 1) % friendMessages.length;
+            messageEl.textContent = friendMessages[msgIndex];
+            messageEl.style.opacity = '1';
+            if (progressBar) progressBar.style.width = '0%';
+        }, 500);
+    };
+
+    const updateProgress = () => {
+        if (!progressBar) progressBar = document.getElementById('msgProgressBar');
+        if (progressBar) {
+            const now = Date.now();
+            const elapsed = now - startTime;
+            if (elapsed >= intervalTime) {
+                changeMessage();
+                startTime = now;
+            } else {
+                const percentage = Math.min((elapsed / intervalTime) * 100, 100);
+                progressBar.style.width = percentage + '%';
+            }
+        }
+        requestAnimationFrame(updateProgress);
+    };
+
+    if (!messageEl.textContent.trim()) {
+        messageEl.textContent = friendMessages[0];
+    } else {
+        const currentText = messageEl.textContent.trim();
+        const foundIndex = friendMessages.indexOf(currentText);
+        if (foundIndex !== -1) msgIndex = foundIndex;
+    }
+
+    requestAnimationFrame(updateProgress);
+}
