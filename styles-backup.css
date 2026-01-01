@@ -374,25 +374,11 @@ body {
 /* Tipografía */
 h1 {
     font-family: 'Pacifico', cursive;
-    font-size: 2.5em;
-    /* Un poco más grande base */
+    font-size: 2em;
+    color: #ffffff;
     margin-bottom: 15px;
-
-    /* Efecto de Texto Dorado Premium */
-    background: linear-gradient(to bottom, #fff4e6 0%, #ffd700 40%, #ffaa00 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: #ffd700;
-    /* Fallback */
-
-    /* Sombra optimizada para background-clip: text */
-    filter: drop-shadow(0 2px 0px rgba(0, 0, 0, 0.3)) drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
-
-    animation: bounce 2s infinite;
-    position: relative;
-    z-index: 2;
-    padding: 0 10px;
+    animation: bounce 2s infinite, textGlow 3s ease-in-out infinite;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(102, 126, 234, 0.6), 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .year {
@@ -978,55 +964,23 @@ button.secondary:active {
     body {
         overflow: hidden;
         height: 100vh;
-        /* Optimización de fondo */
-        background: linear-gradient(-45deg, #667eea, #764ba2);
-        animation: none;
-        /* Desactivar animación de fondo pesada */
     }
 
     h1 {
-        font-size: 1.8em;
-        /* Un poco más grande en móvil */
+        font-size: 1.5em;
         margin-bottom: 8px;
-        /* En móvil simplificamos pero mantenemos el color */
-        background: linear-gradient(to bottom, #fff 0%, #ffd700 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        animation: none;
-        filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.5));
-        text-shadow: none;
     }
 
     .year {
         font-size: 1.8em;
         margin: 8px 0;
-        animation: pulse 2s infinite;
-        /* Mantener solo pulso simple */
-        filter: none;
-        /* Quitar drop-shadow pesado */
     }
 
     .card {
         padding: 15px 10px;
         border-radius: 20px;
         margin: 0;
-        /* Optimización de rendimiento crítica */
-        background: rgba(255, 255, 255, 0.9);
-        /* Opcidad sólida en lugar de blur */
-        backdrop-filter: none;
-        /* MUY costoso en móviles */
-        -webkit-backdrop-filter: none;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        /* Sombra simplificada */
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        animation: fadeInScale 0.5s ease-out;
-        /* Animación más corta y simple */
-    }
-
-    /* Desactivar brillo rotativo pesado */
-    .card::before {
-        display: none;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
     }
 
     .container {
@@ -1038,12 +992,8 @@ button.secondary:active {
 
     .message {
         font-size: 0.8em;
-        line-height: 1.4;
+        line-height: 1.5;
         margin: 10px 0;
-        text-shadow: none;
-        /* Quitar sombras de texto costosas */
-        color: #333;
-        /* Texto oscuro para mejor contraste sin sombras */
     }
 
     .message ul {
@@ -1056,30 +1006,19 @@ button.secondary:active {
     }
 
     .message p {
-        margin: 5px 0;
+        margin: 8px 0;
     }
 
     .signature {
         font-size: 0.75em;
         margin-top: 10px;
-        color: #555;
-        text-shadow: none;
+        line-height: 1.4;
     }
 
     button {
         padding: 10px 18px;
         font-size: 0.7em;
         margin: 4px 3px;
-        animation: none;
-        /* Quitar animación constante */
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        /* Gradiente estático */
-    }
-
-    button::before {
-        display: none;
-        /* Quitar efecto hover complejo */
     }
 
     .button-container {
@@ -1090,10 +1029,6 @@ button.secondary:active {
         font-size: 0.8em;
         padding: 6px 12px;
         margin: 8px 0;
-        background: rgba(245, 87, 108, 0.9);
-        backdrop-filter: none;
-        text-shadow: none;
-        box-shadow: none;
     }
 
     .surprise-box {
@@ -1102,29 +1037,12 @@ button.secondary:active {
         font-size: 1.6em;
         bottom: 12px;
         right: 12px;
-        animation: float 3s ease-in-out infinite;
-        /* Mantener flotación suave */
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    /* Pantalla inicial optimizada */
-    .countdown-screen {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        overflow: hidden;
-    }
-
-    .countdown-display {
-        backdrop-filter: none;
-        background: rgba(255, 255, 255, 0.2);
-        box-shadow: none;
     }
 
     .time-number {
         font-size: 1.6em;
-        padding: 5px;
+        padding: 8px;
         min-width: 40px;
-        background: rgba(255, 255, 255, 0.2);
-        text-shadow: none;
     }
 
     .time-label {
@@ -1133,16 +1051,38 @@ button.secondary:active {
 
     .countdown-title {
         font-size: 1.6em;
-        margin-bottom: 15px;
-        animation: none;
+        margin-bottom: 20px;
+    }
+
+    .countdown-display {
+        padding: 15px;
+        width: 95%;
+    }
+
+    .countdown-time {
+        gap: 6px;
+    }
+
+    .skip-button {
+        padding: 14px 30px;
+        font-size: 0.85em;
+    }
+
+    .hint-text {
+        font-size: 0.8em;
+    }
+
+    .modal-content {
+        padding: 20px 15px;
+        max-width: 95%;
+        border-radius: 20px;
+        max-height: 85vh;
     }
 
     .control-btn {
         width: 40px;
         height: 40px;
         font-size: 1.1em;
-        backdrop-filter: none;
-        background: rgba(255, 255, 255, 0.3);
     }
 
     .control-buttons {
@@ -1150,9 +1090,4 @@ button.secondary:active {
         right: 10px;
         gap: 8px;
     }
-
-    /* Desactivar partículas de fondo en móvil si causan lag */
-    .stars {
-        opacity: 0.5;
-    }
-}
+}\n\n    /* Optimizaciones rendimiento m�viles */\n    .card { backdrop-filter: blur(10px) !important; animation: fadeInScale 1s ease-out !important; }\n    .card::before { display: none !important; }\n    button { animation: none !important; }\n}

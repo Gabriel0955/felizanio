@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function initStars() {
     const starsContainer = document.getElementById('stars');
     if (!starsContainer) return;
-    
+
     for (let i = 0; i < 100; i++) {
         const star = document.createElement('div');
         star.className = 'star';
@@ -49,18 +49,22 @@ function initStars() {
 function initCountdown() {
     updateMainCountdown();
     setInterval(updateMainCountdown, 1000);
-    
+
     updateCountdown();
     setInterval(updateCountdown, 1000);
 }
 
 // Inicializar fuegos artificiales de fondo
 function initBackgroundFireworks() {
+    // En móviles, reducir frecuencia o desactivar para ahorrar batería/GPU
+    const isMobile = window.innerWidth < 768;
+    if (isMobile) return; // Desactivar en móviles para mejor rendimiento
+
     setInterval(() => {
         if (!state.countdownRevealed) {
             createInitialFirework();
         }
-    }, 3000);
+    }, 4000); // 4s en desktop
 }
 
 // Inicializar event listeners
@@ -113,7 +117,7 @@ function initControlButtons() {
             </button>
         </div>
     `;
-    
+
     document.body.insertAdjacentHTML('beforeend', controlsHtml);
 }
 
@@ -153,7 +157,7 @@ function updateCountdown() {
     const newYear = new Date(CONFIG.NEW_YEAR_DATE);
     const diff = newYear - now;
     const countdownEl = document.getElementById('countdown');
-    
+
     if (!countdownEl) return;
 
     if (diff > 0) {
@@ -176,25 +180,25 @@ function updateCountdown() {
 function revealSurprise() {
     const screen = document.getElementById('countdownScreen');
     const content = document.getElementById('mainContent');
-    
+
     if (!screen || !content) return;
 
     // Vibración
     if (navigator.vibrate) {
         navigator.vibrate([100, 50, 100, 50, 100]);
     }
-    
+
     // Fuegos artificiales de transición
     for (let i = 0; i < 30; i++) {
         setTimeout(() => createInitialFirework(), i * 50);
     }
-    
+
     // Revelar contenido después de la animación
     setTimeout(() => {
         screen.classList.add('hidden');
         content.classList.add('visible');
         state.countdownRevealed = true;
-        
+
         // Lanzar celebración
         setTimeout(() => {
             launchFireworks();
@@ -205,10 +209,13 @@ function revealSurprise() {
 
 // Crear fuegos artificiales iniciales
 function createInitialFirework() {
+    const isMobile = window.innerWidth < 768;
+    // Si llegamos aquí en móvil (por click manual), usar menos partículas
+
     const colors = ['#ffffff', '#ffd700', '#ff69b4', '#00ffff', '#ff6347'];
     const x = Math.random() * window.innerWidth;
     const y = Math.random() * window.innerHeight;
-    const particleCount = 20;
+    const particleCount = isMobile ? 8 : 20;
 
     for (let i = 0; i < particleCount; i++) {
         const firework = document.createElement('div');
@@ -216,15 +223,15 @@ function createInitialFirework() {
         firework.style.left = x + 'px';
         firework.style.top = y + 'px';
         firework.style.background = colors[Math.floor(Math.random() * colors.length)];
-        
+
         const angle = (Math.PI * 2 * i) / particleCount;
-        const velocity = 40 + Math.random() * 40;
+        const velocity = (isMobile ? 20 : 40) + Math.random() * (isMobile ? 20 : 40);
         const xVel = Math.cos(angle) * velocity;
         const yVel = Math.sin(angle) * velocity;
-        
+
         firework.style.setProperty('--x', xVel + 'px');
         firework.style.setProperty('--y', yVel + 'px');
-        
+
         document.body.appendChild(firework);
         setTimeout(() => firework.remove(), 2000);
     }
@@ -234,23 +241,23 @@ function createInitialFirework() {
 function openSurprise() {
     const modal = document.getElementById('surpriseModal');
     const content = document.getElementById('surpriseContent');
-    
+
     if (!modal || !content) return;
-    
+
     const surprise = surprises[state.surpriseIndex % surprises.length];
     state.surpriseIndex++;
-    
+
     const isMobile = window.innerWidth < 768;
-    
+
     // Vibración en móviles
     if (navigator.vibrate) {
         navigator.vibrate([100, 50, 100]);
     }
-    
+
     content.innerHTML = generateSurpriseHTML(surprise, isMobile);
     modal.style.display = 'flex';
     createSparkles(isMobile ? 10 : 20);
-    
+
     // Efecto de confetti al abrir
     confetti({
         particleCount: isMobile ? 30 : 50,
@@ -378,7 +385,7 @@ function createSparkles(count) {
             sparkle.style.top = Math.random() * window.innerHeight + 'px';
             sparkle.style.animation = 'twinkle 1s ease-out forwards';
             document.body.appendChild(sparkle);
-            
+
             setTimeout(() => sparkle.remove(), 1000);
         }, i * 100);
     }
@@ -395,7 +402,7 @@ function createMusicNotes() {
             note.style.left = Math.random() * window.innerWidth + 'px';
             note.style.bottom = '0px';
             document.body.appendChild(note);
-            
+
             setTimeout(() => note.remove(), 3000);
         }, i * 150);
     }
@@ -403,12 +410,14 @@ function createMusicNotes() {
 
 // Lanzar fuegos artificiales
 function launchFireworks() {
+    const isMobile = window.innerWidth < 768;
+
     // Vibración en móviles
     if (navigator.vibrate) {
         navigator.vibrate([50, 100, 50, 100, 50]);
     }
-    
-    const duration = 5 * 1000;
+
+    const duration = isMobile ? 3000 : 5000;
     const animationEnd = Date.now() + duration;
     const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 9999 };
 
@@ -416,15 +425,16 @@ function launchFireworks() {
         return Math.random() * (max - min) + min;
     }
 
-    const interval = setInterval(function() {
+    const interval = setInterval(function () {
         const timeLeft = animationEnd - Date.now();
 
         if (timeLeft <= 0) {
             return clearInterval(interval);
         }
 
-        const particleCount = 50 * (timeLeft / duration);
-        
+        // Reducir significativamente las partículas en móvil
+        const particleCount = (isMobile ? 15 : 50) * (timeLeft / duration);
+
         confetti(Object.assign({}, defaults, {
             particleCount,
             origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }
@@ -433,19 +443,20 @@ function launchFireworks() {
             particleCount,
             origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }
         }));
-    }, 250);
+    }, isMobile ? 400 : 250); // Menos frecuencia en móvil
 
     // Fuegos artificiales adicionales
-    for (let i = 0; i < 8; i++) {
+    const extraBursts = isMobile ? 3 : 8;
+    for (let i = 0; i < extraBursts; i++) {
         setTimeout(() => {
             confetti({
-                particleCount: 100,
+                particleCount: isMobile ? 40 : 100,
                 spread: 70,
                 origin: { y: 0.6 },
                 colors: CONFIG.COLORS.fireworks,
                 zIndex: 9999
             });
-        }, i * 400);
+        }, i * (isMobile ? 800 : 400));
     }
 }
 
@@ -475,7 +486,7 @@ function launchMegaCelebration() {
             requestAnimationFrame(frame);
         }
     }());
-    
+
     createMusicNotes();
     setTimeout(() => {
         confetti({
@@ -498,7 +509,7 @@ function handleMouseMove(e) {
         sparkle.style.top = e.pageY + 'px';
         sparkle.style.animation = 'twinkle 0.5s ease-out forwards';
         document.body.appendChild(sparkle);
-        
+
         setTimeout(() => sparkle.remove(), 500);
         state.lastSparkleTime = now;
     }
@@ -519,7 +530,7 @@ function handlePageLoad() {
             createSparkles(5);
         }
     }, 1000);
-    
+
     // Sorpresa automática después de 5 segundos
     setTimeout(() => {
         if (state.surpriseIndex === 0) {
@@ -608,11 +619,11 @@ function toggleAudio() {
             state.audio.volume = 0.3;
             // Aquí podrías agregar una URL a un archivo de música
         }
-        
+
         state.audio.play().catch(err => {
             console.log('Error al reproducir audio:', err);
         });
-        
+
         icon.textContent = '🔊';
         state.audioEnabled = true;
     } else {
@@ -735,13 +746,13 @@ const surprises = [
                 origin: { y: 0.7 },
                 zIndex: 9999
             };
-            
+
             function fire(particleRatio, opts) {
                 confetti(Object.assign({}, defaults, opts, {
                     particleCount: Math.floor(count * particleRatio)
                 }));
             }
-            
+
             fire(0.25, { spread: 26, startVelocity: 55 });
             fire(0.2, { spread: 60 });
             fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
@@ -755,11 +766,11 @@ const surprises = [
         action: () => {
             const duration = 4000;
             const animationEnd = Date.now() + duration;
-            
+
             const interval = setInterval(() => {
                 const timeLeft = animationEnd - Date.now();
                 if (timeLeft <= 0) return clearInterval(interval);
-                
+
                 confetti({
                     particleCount: 3,
                     angle: 90,
@@ -802,7 +813,7 @@ const surprises = [
                 ['#ffff00', '#ffff44'],
                 ['#ff00ff', '#ff44ff']
             ];
-            
+
             colors.forEach((colorSet, index) => {
                 setTimeout(() => {
                     confetti({
