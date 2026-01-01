@@ -12,20 +12,34 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
-    overflow-y: hidden;
-    height: 100vh;
+    overflow-y: auto;
 }
 
 /* Animaciones principales */
 @keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 @keyframes twinkle {
-    0%, 100% { opacity: 0; }
-    50% { opacity: 1; }
+
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
 }
 
 @keyframes explode {
@@ -33,6 +47,7 @@ body {
         transform: translate(0, 0);
         opacity: 1;
     }
+
     100% {
         transform: translate(var(--x), var(--y));
         opacity: 0;
@@ -44,6 +59,7 @@ body {
         opacity: 0;
         transform: scale(0.8) translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: scale(1) translateY(0);
@@ -51,45 +67,101 @@ body {
 }
 
 @keyframes cardFloat {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
 @keyframes shine {
-    0% { left: -50%; }
-    100% { left: 150%; }
+    0% {
+        left: -50%;
+    }
+
+    100% {
+        left: 150%;
+    }
 }
 
 @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
 @keyframes textGlow {
-    0%, 100% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(102, 126, 234, 0.6); }
-    50% { text-shadow: 0 0 30px rgba(255, 255, 255, 1), 0 0 60px rgba(240, 147, 251, 0.8); }
+
+    0%,
+    100% {
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(102, 126, 234, 0.6);
+    }
+
+    50% {
+        text-shadow: 0 0 30px rgba(255, 255, 255, 1), 0 0 60px rgba(240, 147, 251, 0.8);
+    }
 }
 
 @keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
 }
 
 @keyframes rainbowShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes rotate {
-    0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(-10deg); }
-    75% { transform: rotate(10deg); }
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(-10deg);
+    }
+
+    75% {
+        transform: rotate(10deg);
+    }
 }
 
 @keyframes confetti-fall {
@@ -100,49 +172,105 @@ body {
 }
 
 @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
 }
 
 @keyframes bounceIn {
-    0% { transform: scale(0); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
+    0% {
+        transform: scale(0);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 @keyframes slideIn {
-    from { transform: translateX(-100%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 @keyframes heartbeat {
-    0%, 100% { transform: scale(1); }
-    25% { transform: scale(1.2); }
-    50% { transform: scale(1); }
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    25% {
+        transform: scale(1.2);
+    }
+
+    50% {
+        transform: scale(1);
+    }
 }
 
 @keyframes music-float {
-    0% { opacity: 1; transform: translateY(0) rotate(0deg); }
-    100% { opacity: 0; transform: translateY(-200px) rotate(360deg); }
+    0% {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-200px) rotate(360deg);
+    }
 }
 
 @keyframes glow {
-    0%, 100% {
+
+    0%,
+    100% {
         box-shadow: 0 5px 20px rgba(255, 255, 255, 0.3);
     }
+
     50% {
         box-shadow: 0 5px 40px rgba(255, 255, 255, 0.6);
     }
 }
 
 @keyframes buttonGradient {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
 }
 
 @keyframes surpriseGlow {
-    0%, 100% { box-shadow: 0 10px 40px rgba(245, 87, 108, 0.6), 0 0 30px rgba(255, 215, 0, 0.4); }
-    50% { box-shadow: 0 10px 50px rgba(245, 87, 108, 0.9), 0 0 50px rgba(255, 215, 0, 0.7); }
+
+    0%,
+    100% {
+        box-shadow: 0 10px 40px rgba(245, 87, 108, 0.6), 0 0 30px rgba(255, 215, 0, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 10px 50px rgba(245, 87, 108, 0.9), 0 0 50px rgba(255, 215, 0, 0.7);
+    }
 }
 
 @keyframes explode-initial {
@@ -150,6 +278,7 @@ body {
         transform: translate(0, 0);
         opacity: 1;
     }
+
     100% {
         transform: translate(var(--x), var(--y));
         opacity: 0;
@@ -203,7 +332,7 @@ body {
     z-index: 3;
     max-width: 800px;
     margin: 0 auto;
-    padding: 10px;
+    padding: 20px 10px;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -218,7 +347,7 @@ body {
     -webkit-backdrop-filter: blur(20px);
     border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 30px;
-    padding: 30px 20px;
+    padding: 25px 15px;
     box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4), 0 0 40px rgba(255, 255, 255, 0.1);
     animation: fadeInScale 1s ease-out, cardFloat 6s ease-in-out infinite;
     text-align: center;
@@ -227,6 +356,7 @@ body {
     width: 100%;
     max-width: 600px;
     z-index: 1;
+    margin: 10px 0;
 }
 
 .card::before {
@@ -556,6 +686,7 @@ button.secondary:active {
     z-index: 10000;
     padding: 20px;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 .countdown-screen.hidden {
@@ -825,5 +956,138 @@ button.secondary:active {
         top: 20px;
         right: 20px;
         gap: 12px;
+    }
+}
+
+/* Media Queries - Móviles pequeños */
+@media (max-width: 480px) {
+    body {
+        overflow: hidden;
+        height: 100vh;
+    }
+
+    h1 {
+        font-size: 1.5em;
+        margin-bottom: 8px;
+    }
+
+    .year {
+        font-size: 1.8em;
+        margin: 8px 0;
+    }
+
+    .card {
+        padding: 15px 10px;
+        border-radius: 20px;
+        margin: 0;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .container {
+        padding: 10px 8px;
+        height: 100vh;
+        min-height: auto;
+        justify-content: center;
+    }
+
+    .message {
+        font-size: 0.8em;
+        line-height: 1.5;
+        margin: 10px 0;
+    }
+
+    .message ul {
+        margin-top: 8px !important;
+    }
+
+    .message li {
+        margin: 4px 0 !important;
+        font-size: 0.9em !important;
+    }
+
+    .message p {
+        margin: 8px 0;
+    }
+
+    .signature {
+        font-size: 0.75em;
+        margin-top: 10px;
+        line-height: 1.4;
+    }
+
+    button {
+        padding: 10px 18px;
+        font-size: 0.7em;
+        margin: 4px 3px;
+    }
+
+    .button-container {
+        margin-top: 8px;
+    }
+
+    .countdown {
+        font-size: 0.8em;
+        padding: 6px 12px;
+        margin: 8px 0;
+    }
+
+    .surprise-box {
+        width: 50px;
+        height: 50px;
+        font-size: 1.6em;
+        bottom: 12px;
+        right: 12px;
+    }
+
+    .time-number {
+        font-size: 1.6em;
+        padding: 8px;
+        min-width: 40px;
+    }
+
+    .time-label {
+        font-size: 0.6em;
+    }
+
+    .countdown-title {
+        font-size: 1.6em;
+        margin-bottom: 20px;
+    }
+
+    .countdown-display {
+        padding: 15px;
+        width: 95%;
+    }
+
+    .countdown-time {
+        gap: 6px;
+    }
+
+    .skip-button {
+        padding: 14px 30px;
+        font-size: 0.85em;
+    }
+
+    .hint-text {
+        font-size: 0.8em;
+    }
+
+    .modal-content {
+        padding: 20px 15px;
+        max-width: 95%;
+        border-radius: 20px;
+        max-height: 85vh;
+    }
+
+    .control-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1em;
+    }
+
+    .control-buttons {
+        top: 10px;
+        right: 10px;
+        gap: 8px;
     }
 }
