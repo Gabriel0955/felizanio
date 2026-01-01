@@ -639,11 +639,11 @@ function toggleAudio() {
 
 // RotaciÃ³n de Mensajes
 const friendMessages = [
-    "Aunque no hablemos a diario ni nos veamos siempre, sabes que mi cariÃ±o por ti sigue intacto. Â¡Que este 2026 sea increÃ­ble para ti, amiga!",
-    "La verdadera amistad no se mide por la frecuencia, sino por la lealtad. Aunque estemos lejos o ocupados, siempre estÃ¡s en mis mejores deseos.",
-    "No importa cuÃ¡nto tiempo pase sin vernos, nuestra conexiÃ³n sigue igual de fuerte. Gracias por ser esa amiga eterna. Â¡Feliz 2026!",
+    "Aunque no hablemos a diario ni nos veamos siempre, sabes que mi cariño por ti sigue intacto. ¡Que este 2026 sea increíble para ti, amiga!",
+    "La verdadera amistad no se mide por la frecuencia, sino por la lealtad. Aunque estemos lejos o ocupados, siempre estás en mis mejores deseos.",
+    "No importa cuánto tiempo pase sin vernos, nuestra conexión sigue igual de fuerte. Gracias por ser esa amiga eterna. ¡Feliz 2026!",
     "Pasa el tiempo, cambian las cosas, pero tenerte como mejor amiga es una certeza que no cambia. Brindo por nuestra amistad incondicional.",
-    "Sabes que cuentas conmigo siempre, sin importar los dÃ­as o meses que pasen sin hablar. Â¡Te deseo un aÃ±o espectacular lleno de Ã©xitos!"
+    "Sabes que cuentas conmigo siempre, sin importar los días o meses que pasen sin hablar. ¡Te deseo un año espectacular lleno de éxitos!"
 ];
 
 const friendWishes = [
