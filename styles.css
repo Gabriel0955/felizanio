@@ -551,7 +551,8 @@ button.secondary:active {
     font-size: 2em;
     animation: float 3s ease-in-out infinite, surpriseGlow 2s ease-in-out infinite, buttonGradient 3s ease infinite;
     box-shadow: 0 10px 40px rgba(245, 87, 108, 0.6), 0 0 30px rgba(255, 215, 0, 0.4);
-    z-index: 1000;
+    z-index: 10000;
+    /* Asegurar que esté por encima del canvas de confetti (9999) */
     transition: transform 0.3s;
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
@@ -575,10 +576,15 @@ button.secondary:active {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.8);
-    z-index: 9999;
+    z-index: 10001;
+    /* Asegurar que esté por encima de todo */
     justify-content: center;
     align-items: center;
     animation: fadeIn 0.5s;
+}
+
+.modal.active {
+    display: flex;
 }
 
 .modal-content {
@@ -596,6 +602,65 @@ button.secondary:active {
     max-height: 90vh;
     overflow-y: auto;
     box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 50px rgba(255, 255, 255, 0.2);
+}
+
+/* Estilos internos de la sorpresa */
+.surprise-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.surprise-icon-large {
+    font-size: 4em;
+    animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+}
+
+.surprise-title {
+    font-family: 'Pacifico', cursive;
+    font-size: 2em;
+    background: linear-gradient(to right, #fff, #ffd700);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.surprise-text {
+    font-size: 1.2em;
+    line-height: 1.6;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    width: 100%;
+}
+
+.surprise-close-btn {
+    background: linear-gradient(45deg, #FF512F 0%, #DD2476 100%);
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-size: 1.1em;
+    cursor: pointer;
+    margin-top: 15px;
+    box-shadow: 0 5px 15px rgba(221, 36, 118, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    font-weight: bold;
+}
+
+.surprise-close-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(221, 36, 118, 0.6);
+}
+
+.surprise-close-btn:active {
+    transform: scale(0.95);
 }
 
 .close-modal {
@@ -1162,6 +1227,7 @@ button.secondary:active {
         opacity: 0.5;
     }
 }
+
 /* Indicador de lectura de mensajes */
 .message-progress-container {
     width: 100%;
