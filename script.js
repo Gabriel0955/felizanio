@@ -1,4 +1,4 @@
-// Configuración global
+// ConfiguraciÃ³n global
 const CONFIG = {
     NEW_YEAR_DATE: '2026-01-01T00:00:00',
     COLORS: {
@@ -21,15 +21,15 @@ let state = {
     audio: null
 };
 
-// Inicialización
-// Inicialización
+// InicializaciÃ³n
+// InicializaciÃ³n
 document.addEventListener('DOMContentLoaded', () => {
     initStars();
     initCountdown();
     initBackgroundFireworks();
     initEventListeners();
     initControlButtons();
-    setTimeout(initMessageRotationAnimated, 1000); // Iniciar rotación de mensajes con animación
+    setTimeout(initMessageRotationAnimated, 1000); // Iniciar rotaciÃ³n de mensajes con animaciÃ³n
 });
 
 // Crear estrellas de fondo
@@ -58,9 +58,9 @@ function initCountdown() {
 
 // Inicializar fuegos artificiales de fondo
 function initBackgroundFireworks() {
-    // En móviles, reducir frecuencia o desactivar para ahorrar batería/GPU
+    // En mÃ³viles, reducir frecuencia o desactivar para ahorrar baterÃ­a/GPU
     const isMobile = window.innerWidth < 768;
-    if (isMobile) return; // Desactivar en móviles para mejor rendimiento
+    if (isMobile) return; // Desactivar en mÃ³viles para mejor rendimiento
 
     setInterval(() => {
         if (!state.countdownRevealed) {
@@ -84,7 +84,7 @@ function initEventListeners() {
         document.addEventListener('mousemove', handleMouseMove);
     }
 
-    // Touch feedback para móviles
+    // Touch feedback para mÃ³viles
     document.addEventListener('touchstart', handleTouchStart);
 
     // Auto-lanzar fuegos artificiales al cargar
@@ -109,13 +109,13 @@ function initControlButtons() {
     const controlsHtml = `
         <div class="control-buttons">
             <button class="control-btn" onclick="toggleFullscreen()" title="Pantalla completa" aria-label="Pantalla completa">
-                <span id="fullscreen-icon">⛶</span>
+                <span id="fullscreen-icon">â›¶</span>
             </button>
             <button class="control-btn" onclick="shareCard()" title="Compartir" aria-label="Compartir">
-                <span>🔗</span>
+                <span>ðŸ”—</span>
             </button>
-            <button class="control-btn" onclick="toggleAudio()" title="Música" aria-label="Música">
-                <span id="audio-icon">🔇</span>
+            <button class="control-btn" onclick="toggleAudio()" title="MÃºsica" aria-label="MÃºsica">
+                <span id="audio-icon">ðŸ”‡</span>
             </button>
         </div>
     `;
@@ -168,9 +168,9 @@ function updateCountdown() {
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-        countdownEl.innerHTML = `⏰ Faltan: ${days}d ${hours}h ${minutes}m ${seconds}s para el 2026`;
+        countdownEl.innerHTML = `â° Faltan: ${days}d ${hours}h ${minutes}m ${seconds}s para el 2026`;
     } else {
-        countdownEl.innerHTML = '🎉 ¡Ya es 2026!';
+        countdownEl.innerHTML = 'ðŸŽ‰ Â¡Ya es 2026!';
         if (!state.musicPlaying) {
             launchMegaCelebration();
             state.musicPlaying = true;
@@ -185,23 +185,23 @@ function revealSurprise() {
 
     if (!screen || !content) return;
 
-    // Vibración
+    // VibraciÃ³n
     if (navigator.vibrate) {
         navigator.vibrate([100, 50, 100, 50, 100]);
     }
 
-    // Fuegos artificiales de transición
+    // Fuegos artificiales de transiciÃ³n
     for (let i = 0; i < 30; i++) {
         setTimeout(() => createInitialFirework(), i * 50);
     }
 
-    // Revelar contenido después de la animación
+    // Revelar contenido despuÃ©s de la animaciÃ³n
     setTimeout(() => {
         screen.classList.add('hidden');
         content.classList.add('visible');
         state.countdownRevealed = true;
 
-        // Lanzar celebración
+        // Lanzar celebraciÃ³n
         setTimeout(() => {
             launchFireworks();
             createSparkles(20);
@@ -212,7 +212,7 @@ function revealSurprise() {
 // Crear fuegos artificiales iniciales
 function createInitialFirework() {
     const isMobile = window.innerWidth < 768;
-    // Si llegamos aquí en móvil (por click manual), usar menos partículas
+    // Si llegamos aquÃ­ en mÃ³vil (por click manual), usar menos partÃ­culas
 
     const colors = ['#ffffff', '#ffd700', '#ff69b4', '#00ffff', '#ff6347'];
     const x = Math.random() * window.innerWidth;
@@ -251,7 +251,7 @@ function openSurprise() {
 
     const isMobile = window.innerWidth < 768;
 
-    // Vibración en móviles
+    // VibraciÃ³n en mÃ³viles
     if (navigator.vibrate) {
         navigator.vibrate([100, 50, 100]);
     }
@@ -366,7 +366,7 @@ function generateSurpriseHTML(surprise, isMobile) {
                 ontouchend="
                     this.style.transform='scale(1)';
                 ">
-            <span style="position: relative; z-index: 1;">${isMobile ? '✨ ¡ACTIVAR! ✨' : '✨ ¡ACTIVAR MAGIA! ✨'}</span>
+            <span style="position: relative; z-index: 1;">${isMobile ? 'âœ¨ Â¡ACTIVAR! âœ¨' : 'âœ¨ Â¡ACTIVAR MAGIA! âœ¨'}</span>
         </button>
     `;
 }
@@ -377,7 +377,7 @@ function closeModal() {
     if (modal) modal.style.display = 'none';
 }
 
-// Crear chispitas mágicas
+// Crear chispitas mÃ¡gicas
 function createSparkles(count) {
     for (let i = 0; i < count; i++) {
         setTimeout(() => {
@@ -395,7 +395,7 @@ function createSparkles(count) {
 
 // Crear notas musicales flotantes
 function createMusicNotes() {
-    const notes = ['🎵', '🎶', '🎼', '🎤', '🎧'];
+    const notes = ['ðŸŽµ', 'ðŸŽ¶', 'ðŸŽ¼', 'ðŸŽ¤', 'ðŸŽ§'];
     for (let i = 0; i < 20; i++) {
         setTimeout(() => {
             const note = document.createElement('div');
@@ -414,7 +414,7 @@ function createMusicNotes() {
 function launchFireworks() {
     const isMobile = window.innerWidth < 768;
 
-    // Vibración en móviles
+    // VibraciÃ³n en mÃ³viles
     if (navigator.vibrate) {
         navigator.vibrate([50, 100, 50, 100, 50]);
     }
@@ -434,7 +434,7 @@ function launchFireworks() {
             return clearInterval(interval);
         }
 
-        // Reducir significativamente las partículas en móvil
+        // Reducir significativamente las partÃ­culas en mÃ³vil
         const particleCount = (isMobile ? 15 : 50) * (timeLeft / duration);
 
         confetti(Object.assign({}, defaults, {
@@ -445,7 +445,7 @@ function launchFireworks() {
             particleCount,
             origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }
         }));
-    }, isMobile ? 400 : 250); // Menos frecuencia en móvil
+    }, isMobile ? 400 : 250); // Menos frecuencia en mÃ³vil
 
     // Fuegos artificiales adicionales
     const extraBursts = isMobile ? 3 : 8;
@@ -462,7 +462,7 @@ function launchFireworks() {
     }
 }
 
-// Mega celebración
+// Mega celebraciÃ³n
 function launchMegaCelebration() {
     const end = Date.now() + (10 * 1000);
 
@@ -497,7 +497,7 @@ function launchMegaCelebration() {
             origin: { y: 0.6 },
             zIndex: 9999
         });
-        alert("🎊 ¡FELIZ AÑO NUEVO! 🎊");
+        alert("ðŸŽŠ Â¡FELIZ AÃ‘O NUEVO! ðŸŽŠ");
     }, 1000);
 }
 
@@ -533,7 +533,7 @@ function handlePageLoad() {
         }
     }, 1000);
 
-    // Sorpresa automática después de 5 segundos
+    // Sorpresa automÃ¡tica despuÃ©s de 5 segundos
     setTimeout(() => {
         if (state.surpriseIndex === 0) {
             const surpriseBox = document.querySelector('.surprise-box');
@@ -557,7 +557,7 @@ function toggleFullscreen() {
         } else if (document.documentElement.msRequestFullscreen) {
             document.documentElement.msRequestFullscreen();
         }
-        icon.textContent = '⛶';
+        icon.textContent = 'â›¶';
         state.isFullscreen = true;
     } else {
         if (document.exitFullscreen) {
@@ -567,15 +567,15 @@ function toggleFullscreen() {
         } else if (document.msExitFullscreen) {
             document.msExitFullscreen();
         }
-        icon.textContent = '⛶';
+        icon.textContent = 'â›¶';
         state.isFullscreen = false;
     }
 }
 
 function shareCard() {
     const shareData = {
-        title: '¡Feliz Año Nuevo 2026!',
-        text: 'Te deseo un increíble Año Nuevo 2026 lleno de alegría y éxito 🎆',
+        title: 'Â¡Feliz AÃ±o Nuevo 2026!',
+        text: 'Te deseo un increÃ­ble AÃ±o Nuevo 2026 lleno de alegrÃ­a y Ã©xito ðŸŽ†',
         url: window.location.href
     };
 
@@ -595,7 +595,7 @@ function shareCard() {
         // Fallback: copiar al portapapeles
         navigator.clipboard.writeText(window.location.href)
             .then(() => {
-                alert('¡Enlace copiado al portapapeles! 🔗');
+                alert('Â¡Enlace copiado al portapapeles! ðŸ”—');
                 confetti({
                     particleCount: 50,
                     spread: 60,
@@ -615,58 +615,58 @@ function toggleAudio() {
     if (!state.audioEnabled) {
         // Crear y reproducir audio
         if (!state.audio) {
-            // URL de música festiva (usaremos un tono base64 simple)
+            // URL de mÃºsica festiva (usaremos un tono base64 simple)
             state.audio = new Audio();
             state.audio.loop = true;
             state.audio.volume = 0.3;
-            // Aquí podrías agregar una URL a un archivo de música
+            // AquÃ­ podrÃ­as agregar una URL a un archivo de mÃºsica
         }
 
         state.audio.play().catch(err => {
             console.log('Error al reproducir audio:', err);
         });
 
-        icon.textContent = '🔊';
+        icon.textContent = 'ðŸ”Š';
         state.audioEnabled = true;
     } else {
         if (state.audio) {
             state.audio.pause();
         }
-        icon.textContent = '🔇';
+        icon.textContent = 'ðŸ”‡';
         state.audioEnabled = false;
     }
 }
 
-// Rotación de Mensajes
+// RotaciÃ³n de Mensajes
 const friendMessages = [
-    "Aunque no hablemos a diario ni nos veamos siempre, sabes que mi cariño por ti sigue intacto. ¡Que este 2026 sea increíble para ti, amiga!",
-    "La verdadera amistad no se mide por la frecuencia, sino por la lealtad. Aunque estemos lejos o ocupados, siempre estás en mis mejores deseos.",
-    "No importa cuánto tiempo pase sin vernos, nuestra conexión sigue igual de fuerte. Gracias por ser esa amiga eterna. ¡Feliz 2026!",
+    "Aunque no hablemos a diario ni nos veamos siempre, sabes que mi cariÃ±o por ti sigue intacto. Â¡Que este 2026 sea increÃ­ble para ti, amiga!",
+    "La verdadera amistad no se mide por la frecuencia, sino por la lealtad. Aunque estemos lejos o ocupados, siempre estÃ¡s en mis mejores deseos.",
+    "No importa cuÃ¡nto tiempo pase sin vernos, nuestra conexiÃ³n sigue igual de fuerte. Gracias por ser esa amiga eterna. Â¡Feliz 2026!",
     "Pasa el tiempo, cambian las cosas, pero tenerte como mejor amiga es una certeza que no cambia. Brindo por nuestra amistad incondicional.",
-    "Sabes que cuentas conmigo siempre, sin importar los días o meses que pasen sin hablar. ¡Te deseo un año espectacular lleno de éxitos!"
+    "Sabes que cuentas conmigo siempre, sin importar los dÃ­as o meses que pasen sin hablar. Â¡Te deseo un aÃ±o espectacular lleno de Ã©xitos!"
 ];
 
 const friendWishes = [
-    "🤝 Una amistad a prueba de tiempo",
-    "🌟 Que cumplas todos tus sueños",
-    "✨ Saber que siempre estamos ahí",
-    "💫 Reencuentros inolvidables",
-    "💪 Salud, energía y bienestar",
-    "😊 Sonrisas y felicidad genuina",
-    "🎯 Éxito en tus proyectos personales",
-    "🌈 Que la distancia nunca nos separe",
-    "🚀 Crecimiento en todo lo que hagas",
-    "💙 Un año lleno de bendiciones"
+    "ðŸ¤ Una amistad a prueba de tiempo",
+    "ðŸŒŸ Que cumplas todos tus sueÃ±os",
+    "âœ¨ Saber que siempre estamos ahÃ­",
+    "ðŸ’« Reencuentros inolvidables",
+    "ðŸ’ª Salud, energÃ­a y bienestar",
+    "ðŸ˜Š Sonrisas y felicidad genuina",
+    "ðŸŽ¯ Ã‰xito en tus proyectos personales",
+    "ðŸŒˆ Que la distancia nunca nos separe",
+    "ðŸš€ Crecimiento en todo lo que hagas",
+    "ðŸ’™ Un aÃ±o lleno de bendiciones"
 ];
 
 function initMessageRotation() {
     const messageEl = document.getElementById('randomMessage');
     const wishesList = document.getElementById('wishesList');
 
-    // Si no existen los elementos, no hacer nada (protección)
+    // Si no existen los elementos, no hacer nada (protecciÃ³n)
     if (!messageEl) return;
 
-    // Inicializar lista de deseos si está vacía (para index.php o primera carga)
+    // Inicializar lista de deseos si estÃ¡ vacÃ­a (para index.php o primera carga)
     if (wishesList && wishesList.children.length === 0) {
         friendWishes.forEach(wish => {
             const li = document.createElement('li');
@@ -676,15 +676,15 @@ function initMessageRotation() {
             wishesList.appendChild(li);
         });
 
-        // También poner el año si falta
+        // TambiÃ©n poner el aÃ±o si falta
         const yearEl = document.getElementById('currentYear');
         if (yearEl) yearEl.textContent = new Date().getFullYear();
     }
 
-    // Iniciar rotación cada 6 segundos
+    // Iniciar rotaciÃ³n cada 6 segundos
     let msgIndex = 0;
 
-    // Función para cambiar mensaje con fade
+    // FunciÃ³n para cambiar mensaje con fade
     const changeMessage = () => {
         // Fade out
         messageEl.style.transition = 'opacity 0.5s ease-in-out';
@@ -700,24 +700,24 @@ function initMessageRotation() {
         }, 500);
     };
 
-    // Establecer primer mensaje si está vacío (HTML estático)
+    // Establecer primer mensaje si estÃ¡ vacÃ­o (HTML estÃ¡tico)
     if (!messageEl.textContent.trim()) {
         messageEl.textContent = friendMessages[0];
     } else {
-        // Si ya tiene texto (PHP), buscar cuál es para seguir la secuencia
+        // Si ya tiene texto (PHP), buscar cuÃ¡l es para seguir la secuencia
         const currentText = messageEl.textContent.trim();
         const foundIndex = friendMessages.indexOf(currentText);
         if (foundIndex !== -1) msgIndex = foundIndex;
     }
 
-    setInterval(changeMessage, 6000); // Cambiar cada 6 segundos
+    setInterval(changeMessage, 15000); // Cambiar cada 6 segundos
 }
 
 // Array de sorpresas
 const surprises = [
     {
-        title: "🎆 ¡Explosión de Fuegos Artificiales!",
-        message: "Que tu año explote de alegría y color como estos fuegos artificiales 🎇",
+        title: "ðŸŽ† Â¡ExplosiÃ³n de Fuegos Artificiales!",
+        message: "Que tu aÃ±o explote de alegrÃ­a y color como estos fuegos artificiales ðŸŽ‡",
         action: () => {
             for (let i = 0; i < 20; i++) {
                 setTimeout(() => {
@@ -733,8 +733,8 @@ const surprises = [
         }
     },
     {
-        title: "💎 ¡Diamantes Brillantes!",
-        message: "Que brilles como un diamante y cada día sea valioso como una joya 💎✨",
+        title: "ðŸ’Ž Â¡Diamantes Brillantes!",
+        message: "Que brilles como un diamante y cada dÃ­a sea valioso como una joya ðŸ’Žâœ¨",
         action: () => {
             const end = Date.now() + 3000;
             (function frame() {
@@ -767,8 +767,8 @@ const surprises = [
         }
     },
     {
-        title: "⭐ ¡Estrellas Doradas!",
-        message: "Brilla con luz propia este 2026, ¡eres una estrella! 🌟💫",
+        title: "â­ Â¡Estrellas Doradas!",
+        message: "Brilla con luz propia este 2026, Â¡eres una estrella! ðŸŒŸðŸ’«",
         action: () => {
             confetti({
                 particleCount: 100,
@@ -793,8 +793,8 @@ const surprises = [
         }
     },
     {
-        title: "🎊 ¡Fiesta Total!",
-        message: "¡Que nunca falten motivos para celebrar y sonreír! 🥳🎉",
+        title: "ðŸŽŠ Â¡Fiesta Total!",
+        message: "Â¡Que nunca falten motivos para celebrar y sonreÃ­r! ðŸ¥³ðŸŽ‰",
         action: () => {
             confetti({
                 particleCount: 200,
@@ -816,8 +816,8 @@ const surprises = [
         }
     },
     {
-        title: "💥 ¡Explosión Masiva!",
-        message: "Que tus sueños exploten en realidad durante este año nuevo 💫✨",
+        title: "ðŸ’¥ Â¡ExplosiÃ³n Masiva!",
+        message: "Que tus sueÃ±os exploten en realidad durante este aÃ±o nuevo ðŸ’«âœ¨",
         action: () => {
             const count = 200;
             const defaults = {
@@ -839,8 +839,8 @@ const surprises = [
         }
     },
     {
-        title: "🎇 ¡Cascada de Fuegos!",
-        message: "Que las bendiciones caigan sobre ti como cascada todo el año 🙏💙",
+        title: "ðŸŽ‡ Â¡Cascada de Fuegos!",
+        message: "Que las bendiciones caigan sobre ti como cascada todo el aÃ±o ðŸ™ðŸ’™",
         action: () => {
             const duration = 4000;
             const animationEnd = Date.now() + duration;
@@ -862,8 +862,8 @@ const surprises = [
         }
     },
     {
-        title: "✨ ¡Espiral Mágica!",
-        message: "La vida da vueltas, ¡disfruta cada momento mágico! 🌀💖",
+        title: "âœ¨ Â¡Espiral MÃ¡gica!",
+        message: "La vida da vueltas, Â¡disfruta cada momento mÃ¡gico! ðŸŒ€ðŸ’–",
         action: () => {
             for (let i = 0; i < 30; i++) {
                 setTimeout(() => {
@@ -881,8 +881,8 @@ const surprises = [
         }
     },
     {
-        title: "🌟 ¡Explosión de Colores!",
-        message: "Que tu vida se llene de colores, aventuras y momentos inolvidables 🎨🌈",
+        title: "ðŸŒŸ Â¡ExplosiÃ³n de Colores!",
+        message: "Que tu vida se llene de colores, aventuras y momentos inolvidables ðŸŽ¨ðŸŒˆ",
         action: () => {
             const colors = [
                 ['#ff0000', '#ff4444'],
@@ -907,14 +907,14 @@ const surprises = [
     }
 ];
 
-// Nueva funci�n de rotaci�n con barra de progreso
+// Nueva función de rotación con barra de progreso
 function initMessageRotationAnimated() {
     const messageEl = document.getElementById('randomMessage');
     const wishesList = document.getElementById('wishesList');
 
     if (!messageEl) return;
 
-    // Inicializar lista de deseos si est� vac�a
+    // Inicializar lista de deseos si está vacía
     if (wishesList && wishesList.children.length === 0) {
         friendWishes.forEach(wish => {
             const li = document.createElement('li');
